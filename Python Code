@@ -1,0 +1,72 @@
+import time
+import random
+
+
+def print_pause(message_to_print, pause=2):
+    print(message_to_print)
+    time.sleep(pause)
+
+
+def valid_input(prompt, option1, option2):
+    while True:
+        response = input(prompt).lower()
+        if option1 == response:
+            return response
+        elif option2 == response:
+            return response
+        else:
+            print_pause("Invalid response, please try again.")
+
+
+scenarios = random.choice(["You are on a plane headed to return the jewels.",
+                           "You are in a hotel lobby protecting the jewels.",
+                           "You are on a boat, headed to return the jewels."])
+
+
+def intro():
+    print_pause("You are a spy.")
+    print_pause(scenarios)
+    print_pause("A shady character is walking your way.", 3)
+
+
+def make_choices():
+    response = valid_input("You have to make a quick decision. "
+                           "What will you do next, walk or nothing?\n",
+                           "walk", "nothing")
+    if "walk" in response:
+        print_pause("While walking past the character, he hits you.")
+        print_pause("You run away")
+    elif "nothing" in response:
+        print_pause("He attacks you in your seat. You get up and run away.")
+    print_pause("What will you do in part 2?")
+
+
+def make_new_choices():
+    response = valid_input("You have to do something new. "
+                           "How will you survive. Will you fight or hide?\n",
+                           "fight", "hide")
+    if "fight" in response:
+        print_pause("You turn, knock him out and secure the jewels. You win!")
+    elif "hide" in response:
+        print_pause("You are found, shot,and the jewels are stolen. You lose!")
+
+
+def play_again():
+    response = valid_input("Would you like to accept the mission again? "
+                           "Please say 'Accept' or 'Deny'.\n",
+                           "accept", "deny")
+    if "deny" in response:
+        print_pause("Thanks for playing, goodbye!")
+    elif "accept" in response:
+        print_pause("Let's start the mission.")
+        adventure_game()
+
+
+def adventure_game():
+    intro()
+    make_choices()
+    make_new_choices()
+    play_again()
+
+
+adventure_game()
